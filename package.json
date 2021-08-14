@@ -1,0 +1,22 @@
+{
+  "name": "selenium-grid4-trial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Gen Takeda",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "12",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@types/jest": "^27.0.1",
+    "D": "^1.0.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4"
+  }
+}
