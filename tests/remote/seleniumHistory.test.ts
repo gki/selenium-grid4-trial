@@ -8,7 +8,7 @@ capabilities.set('firefoxOptions', {
     '--disable-gpu',
     '--window-size=1024,768'
   ],
-  w3c: false
+  w3c: true
 })
 
 // start docker image with below command before run.
