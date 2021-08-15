@@ -10,6 +10,11 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - uses: browser-actions/setup-chrome@latest
       - run: chromium --version
       - run: yarn install
@@ -60,3 +65,24 @@ jobs:
   #     - uses: actions/setup-node@v1
   #     - run: npm install -g bats
   #     - run: bats -v
+  selenium-multibrowser-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: docker up
+        run: docker-compose -f docker-compose-multibrowser.yml up -d
+      - run: yarn install
+      - run: yarn test tests/grid/multibrowser
+      - name: docker down
+        run: docker-compose -f docker-compose-multibrowser.yml down
+        if: ${{ always() }}
