@@ -1,22 +1,13 @@
 import { Builder, By, Capabilities, Key, until, WebDriver } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome'
-
-const capabilities: Capabilities = Capabilities.chrome()
-capabilities.set('chromeOptions', {
-  args: [
-    '--headless',
-    '--disable-gpu',
-    '--window-size=1024,768'
-  ],
-  w3c: false
-})
+import { chromeCapabilities } from '../browserOptions';
 
 describe('selenium.dev', () => {
     let driver: WebDriver;
     describe('History', () => {
         beforeEach(async () => {
             driver = await new Builder()
-                .withCapabilities(capabilities)
+                .withCapabilities(chromeCapabilities)
                 .setChromeService(new chrome.ServiceBuilder('./webdriver/mac/chrome/chromedriver') )
                 .build()
             await driver.get('https://www.selenium.dev/')

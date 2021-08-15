@@ -1,6 +1,9 @@
 import { Builder, By, WebDriver } from 'selenium-webdriver';
 import { firefoxCapabilities } from '../../browserOptions'
+jest.setTimeout(60000);
 
+// start docker image with below command before run.
+// docker-compose -f docker-compose-v3.yml up
 describe('selenium.dev', () => {
     let driver: WebDriver;
     describe('History', () => {
@@ -10,10 +13,12 @@ describe('selenium.dev', () => {
                 .withCapabilities(firefoxCapabilities)
                 .build()
             await driver.get('https://www.selenium.dev/')
+            console.log('finish beforeEach');
         })
 
         afterEach(() => {
             driver.quit();
+            console.log('finish afterEach');
         })
 
         it('should have a link to W3C Recommendation', async () => {

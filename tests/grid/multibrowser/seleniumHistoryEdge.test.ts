@@ -1,6 +1,5 @@
 import { Builder, By, WebDriver } from 'selenium-webdriver';
-import { edgeCapabilities } from '../browserOptions'
-jest.setTimeout(60000);
+import { edgeCapabilities } from '../../browserOptions'
 
 describe('selenium.dev', () => {
     let driver: WebDriver;

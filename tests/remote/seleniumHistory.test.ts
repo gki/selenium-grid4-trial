@@ -1,15 +1,5 @@
 import { Builder, By, Capabilities, Key, until, WebDriver } from 'selenium-webdriver';
-jest.setTimeout(60000);
-
-const capabilities: Capabilities = Capabilities.firefox()
-capabilities.set('firefoxOptions', {
-  args: [
-    // '--headless',
-    '--disable-gpu',
-    '--window-size=1024,768'
-  ],
-  w3c: true
-})
+import { firefoxCapabilities } from '../browserOptions';
 
 // start docker image with below command before run.
 // docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210804
@@ -19,7 +9,7 @@ describe('selenium.dev', () => {
         beforeEach(async () => {
             driver = await new Builder()
                 .usingServer('http://localhost:4444')
-                .withCapabilities(capabilities)
+                .withCapabilities(firefoxCapabilities)
                 .build()
             await driver.get('https://www.selenium.dev/')
         })

@@ -1,6 +1,9 @@
 import { Builder, By, WebDriver } from 'selenium-webdriver';
 import { chromeCapabilities } from '../../browserOptions'
+jest.setTimeout(60000);
 
+// start docker image with below command before run.
+// docker-compose -f docker-compose-v3.yml up
 describe('selenium.dev', () => {
     let driver: WebDriver;
     describe('History', () => {
@@ -10,10 +13,12 @@ describe('selenium.dev', () => {
                 .withCapabilities(chromeCapabilities)
                 .build()
             await driver.get('https://www.selenium.dev/')
+            console.log('finish beforeEach');
         })
 
         afterEach(() => {
             driver.quit();
+            console.log('finish afterEach');
         })
 
         it('1st card should explain that Selenium was started by 2004', async () => {

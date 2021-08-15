@@ -1,6 +1,5 @@
 import { Builder, By, WebDriver } from 'selenium-webdriver';
-import { firefoxCapabilities } from '../browserOptions'
-jest.setTimeout(60000);
+import { firefoxCapabilities } from '../../browserOptions'
 
 describe('selenium.dev', () => {
     let driver: WebDriver;
