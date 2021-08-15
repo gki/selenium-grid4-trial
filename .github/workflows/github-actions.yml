@@ -57,14 +57,6 @@ jobs:
       - name: docker down
         run: docker-compose -f docker-compose-parallel.yml down
         if: ${{ always() }}
-
-  # selenium-multibrowser-run:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #     - run: npm install -g bats
-  #     - run: bats -v
   selenium-multibrowser-run:
     runs-on: ubuntu-latest
     steps:

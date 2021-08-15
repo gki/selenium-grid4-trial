@@ -6,7 +6,7 @@ const baseParams = {
         '--disable-gpu',
         '--window-size=1024,768'
       ],
-      w3c: false
+      w3c: true
 }
 export const firefoxCapabilities: Capabilities = Capabilities.firefox()
 firefoxCapabilities.set('firefoxOptions', baseParams)
