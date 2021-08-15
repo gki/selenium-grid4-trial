@@ -74,7 +74,7 @@ jobs:
       - name: docker up
         run: docker-compose -f docker-compose-multibrowser.yml up -d
       - run: yarn install
-      - run: yarn test tests/grid/multibrowser
+      - run: yarn test tests/grid/multibrowser/seleniumHistoryEdge.test.ts
       - name: docker down
         run: docker-compose -f docker-compose-multibrowser.yml down
         if: ${{ always() }}
