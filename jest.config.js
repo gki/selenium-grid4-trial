@@ -1,5 +1,5 @@
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
-    testTimeout: 60000
+    testTimeout: 120000
 };
