@@ -6,6 +6,7 @@ describe('selenium.dev', () => {
     describe('History', () => {
         beforeEach(async () => {
             driver = await new Builder()
+                .forBrowser('MicrosoftEdge')
                 .usingServer('http://localhost:4444')
                 .withCapabilities(edgeCapabilities)
                 .build()
