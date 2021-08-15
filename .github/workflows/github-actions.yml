@@ -1,0 +1,32 @@
+name: github-actions
+on: [push]
+jobs:
+  selenium-local-run:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
+      - run: open ~/Downloads/googlechrome.dmg
+      - run: sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
+      - run: yarn test tests/localdriver
+  # selenium-remote-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #     - run: npm install -g bats
+  #     - run: bats -v
+  # selenium-parallel-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #     - run: npm install -g bats
+  #     - run: bats -v
+  # selenium-multibrowser-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #     - run: npm install -g bats
+  #     - run: bats -v
