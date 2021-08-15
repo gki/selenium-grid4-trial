@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
-      - run: open ~/Downloads/googlechrome.dmg
+      - run: open ./googlechrome.dmg
       - run: sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
       - run: yarn test tests/localdriver
   # selenium-remote-run:
