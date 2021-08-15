@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
+      - run: chromium --version
       - run: yarn test tests/localdriver
   # selenium-remote-run:
   #   runs-on: ubuntu-latest
