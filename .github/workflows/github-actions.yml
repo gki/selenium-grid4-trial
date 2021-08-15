@@ -1,62 +1,62 @@
 name: github-actions
 on: [push]
 jobs:
-  selenium-local-run:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - uses: browser-actions/setup-chrome@latest
-      - run: chromium --version
-      - run: yarn install
-      - run: yarn test tests/localdriver
-  selenium-remote-run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - run: yarn install
-      - run: docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210804
-      - run: yarn test tests/remote
-  selenium-parallel-run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: docker up
-        run: docker-compose -f docker-compose-parallel.yml up --scale firefox=2 -d
-      - run: yarn install
-      - run: yarn test tests/grid/parallel
-      - name: docker down
-        run: docker-compose -f docker-compose-parallel.yml down
-        if: ${{ always() }}
+  # selenium-local-run:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/cache@v2
+  #       env:
+  #         cache-name: cache-node-modules
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-build-${{ env.cache-name }}-
+  #           ${{ runner.os }}-build-
+  #           ${{ runner.os }}-
+  #     - uses: browser-actions/setup-chrome@latest
+  #     - run: chromium --version
+  #     - run: yarn install
+  #     - run: yarn test tests/localdriver
+  # selenium-remote-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/cache@v2
+  #       env:
+  #         cache-name: cache-node-modules
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-build-${{ env.cache-name }}-
+  #           ${{ runner.os }}-build-
+  #           ${{ runner.os }}-
+  #     - run: yarn install
+  #     - run: docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210804
+  #     - run: yarn test tests/remote
+  # selenium-parallel-run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/cache@v2
+  #       env:
+  #         cache-name: cache-node-modules
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-build-${{ env.cache-name }}-
+  #           ${{ runner.os }}-build-
+  #           ${{ runner.os }}-
+  #     - name: docker up
+  #       run: docker-compose -f docker-compose-parallel.yml up --scale firefox=2 -d
+  #     - run: yarn install
+  #     - run: yarn test tests/grid/parallel
+  #     - name: docker down
+  #       run: docker-compose -f docker-compose-parallel.yml down
+  #       if: ${{ always() }}
   selenium-multibrowser-run:
     runs-on: ubuntu-latest
     steps:
@@ -71,10 +71,11 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: docker up
-        run: docker-compose -f docker-compose-multibrowser.yml up -d
+      # - name: docker up
+      #   run: docker-compose -f docker-compose-multibrowser.yml up -d
       - run: yarn install
+      - run: docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-edge:4.0.0-rc-1-prerelease-20210804
       - run: yarn test tests/grid/multibrowser/seleniumHistoryEdge.test.ts
-      - name: docker down
-        run: docker-compose -f docker-compose-multibrowser.yml down
-        if: ${{ always() }}
+      # - name: docker down
+      #   run: docker-compose -f docker-compose-multibrowser.yml down
+      #   if: ${{ always() }}
