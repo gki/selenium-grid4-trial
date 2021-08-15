@@ -1,4 +1,4 @@
-import { Builder, By, WebDriver } from 'selenium-webdriver';
+import { Browser, Builder, By, WebDriver } from 'selenium-webdriver';
 import { edgeCapabilities } from '../../browserOptions'
 
 describe('selenium.dev', () => {
@@ -6,9 +6,9 @@ describe('selenium.dev', () => {
     describe('History', () => {
         beforeEach(async () => {
             driver = await new Builder()
-                .forBrowser('MicrosoftEdge')
                 .usingServer('http://localhost:4444')
                 .withCapabilities(edgeCapabilities)
+                .forBrowser(Browser.EDGE)
                 .build()
             await driver.get('https://www.selenium.dev/')
         })
