@@ -5,9 +5,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
-      - run: open ./googlechrome.dmg
-      - run: sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
+      - run: brew cask install google-chrome
       - run: yarn test tests/localdriver
   # selenium-remote-run:
   #   runs-on: ubuntu-latest
