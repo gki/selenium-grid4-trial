@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: browser-actions/setup-chrome@latest
       - run: chromium --version
-      - run: yarn intall
+      - run: yarn add
       - run: yarn test tests/localdriver
   # selenium-remote-run:
   #   runs-on: ubuntu-latest
