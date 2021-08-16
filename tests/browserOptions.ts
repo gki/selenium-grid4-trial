@@ -2,7 +2,7 @@ import { Capabilities } from 'selenium-webdriver';
 
 const baseParams = {
     args: [
-        '--headless',
+        // '--headless',
         '--disable-gpu',
         '--window-size=1024,768'
       ],

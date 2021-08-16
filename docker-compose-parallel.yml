@@ -14,17 +14,12 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_CONCURRENT_SESSIONS=1
-    # ports:
-    #   - "6902:7900"
+    ports:
+      - "6900-6901:7900"
 
   selenium-hub:
     image: selenium/hub:4.0.0-rc-1-prerelease-20210804
     container_name: selenium-hub
-    environment:
-      - JAVA_OPTS=-Xmx1024m
-      - GRID_DEBUG=true
-      - GRID_MAX_SESSION=4
     networks:
       - grid
     ports:
